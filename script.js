@@ -2,6 +2,7 @@
 var mode = 1;    // This variable is used to determine the mode of the game, Game mode 1 is Player VS Player, Game mode 2 is Player VS Random CPU, Game mode 3 is Player VS MiniMax AI.
 var turn = 1;    // This variable is used to determine whose player is turn now , 1 is X turn and 0 is O turn.
 var gameEnd = 0; // This variable is used to determine whether the game ended or not, 1 means game ended, 0 means game NOT ended yet.
+var wait = 0;    //this variable is used to dely the Ai to make game more realistic
 
 var board = new Array(10).fill(0);  // This Array is the Game Board, from 1-9 (1-indexed) and its filled with zeros, which mean its currently empty, 1 means its played on, 0 means its empty, and so on.
 var xBoard = new Array(10).fill(0); // This Array is the X board, from 1-9 (1-indexed) and its filled with zeros, which means its currently empty, this array gives you X player positions.
@@ -54,39 +55,39 @@ function Pop_Up_Window() {
 function Squares_Options() {
     // This function gives you the ability to choose which square you will put your letter in.
 
-    square1.onclick = function () { Play_Turn(1) };
-    square2.onclick = function () { Play_Turn(2) };
-    square3.onclick = function () { Play_Turn(3) };
-    square4.onclick = function () { Play_Turn(4) };
-    square5.onclick = function () { Play_Turn(5) };
-    square6.onclick = function () { Play_Turn(6) };
-    square7.onclick = function () { Play_Turn(7) };
-    square8.onclick = function () { Play_Turn(8) };
-    square9.onclick = function () { Play_Turn(9) };
+    square1.onclick = function () { if (!wait) Play_Turn(1) };
+    square2.onclick = function () { if (!wait) Play_Turn(2) };
+    square3.onclick = function () { if (!wait) Play_Turn(3) };
+    square4.onclick = function () { if (!wait) Play_Turn(4) };
+    square5.onclick = function () { if (!wait) Play_Turn(5) };
+    square6.onclick = function () { if (!wait) Play_Turn(6) };
+    square7.onclick = function () { if (!wait) Play_Turn(7) };
+    square8.onclick = function () { if (!wait) Play_Turn(8) };
+    square9.onclick = function () { if (!wait) Play_Turn(9) };
 }
 
 function Squares_Hover() {
     // This function is for squares hovering , when you hover unplayed square , a grey letter is displayed to show you whose turn is and which square is the mouse pointing.
 
-    square1.onmouseover = function () { if (!board[1] && !gameEnd) Grey_Letter(square1); };
-    square2.onmouseover = function () { if (!board[2] && !gameEnd) Grey_Letter(square2); };
-    square3.onmouseover = function () { if (!board[3] && !gameEnd) Grey_Letter(square3); };
-    square4.onmouseover = function () { if (!board[4] && !gameEnd) Grey_Letter(square4); };
-    square5.onmouseover = function () { if (!board[5] && !gameEnd) Grey_Letter(square5); };
-    square6.onmouseover = function () { if (!board[6] && !gameEnd) Grey_Letter(square6); };
-    square7.onmouseover = function () { if (!board[7] && !gameEnd) Grey_Letter(square7); };
-    square8.onmouseover = function () { if (!board[8] && !gameEnd) Grey_Letter(square8); };
-    square9.onmouseover = function () { if (!board[9] && !gameEnd) Grey_Letter(square9); };
+    square1.onmouseover = function () { if (!wait && !board[1] && !gameEnd) Grey_Letter(square1); };
+    square2.onmouseover = function () { if (!wait && !board[2] && !gameEnd) Grey_Letter(square2); };
+    square3.onmouseover = function () { if (!wait && !board[3] && !gameEnd) Grey_Letter(square3); };
+    square4.onmouseover = function () { if (!wait && !board[4] && !gameEnd) Grey_Letter(square4); };
+    square5.onmouseover = function () { if (!wait && !board[5] && !gameEnd) Grey_Letter(square5); };
+    square6.onmouseover = function () { if (!wait && !board[6] && !gameEnd) Grey_Letter(square6); };
+    square7.onmouseover = function () { if (!wait && !board[7] && !gameEnd) Grey_Letter(square7); };
+    square8.onmouseover = function () { if (!wait && !board[8] && !gameEnd) Grey_Letter(square8); };
+    square9.onmouseover = function () { if (!wait && !board[9] && !gameEnd) Grey_Letter(square9); };
 
-    square1.onmouseleave = function () { if (!board[1] && !gameEnd) square1.innerHTML = '&nbsp;'; };
-    square2.onmouseleave = function () { if (!board[2] && !gameEnd) square2.innerHTML = '&nbsp;'; };
-    square3.onmouseleave = function () { if (!board[3] && !gameEnd) square3.innerHTML = '&nbsp;'; };
-    square4.onmouseleave = function () { if (!board[4] && !gameEnd) square4.innerHTML = '&nbsp;'; };
-    square5.onmouseleave = function () { if (!board[5] && !gameEnd) square5.innerHTML = '&nbsp;'; };
-    square6.onmouseleave = function () { if (!board[6] && !gameEnd) square6.innerHTML = '&nbsp;'; };
-    square7.onmouseleave = function () { if (!board[7] && !gameEnd) square7.innerHTML = '&nbsp;'; };
-    square8.onmouseleave = function () { if (!board[8] && !gameEnd) square8.innerHTML = '&nbsp;'; };
-    square9.onmouseleave = function () { if (!board[9] && !gameEnd) square9.innerHTML = '&nbsp;'; };
+    square1.onmouseleave = function () { if (!wait && !board[1] && !gameEnd) square1.innerHTML = '&nbsp;'; };
+    square2.onmouseleave = function () { if (!wait && !board[2] && !gameEnd) square2.innerHTML = '&nbsp;'; };
+    square3.onmouseleave = function () { if (!wait && !board[3] && !gameEnd) square3.innerHTML = '&nbsp;'; };
+    square4.onmouseleave = function () { if (!wait && !board[4] && !gameEnd) square4.innerHTML = '&nbsp;'; };
+    square5.onmouseleave = function () { if (!wait && !board[5] && !gameEnd) square5.innerHTML = '&nbsp;'; };
+    square6.onmouseleave = function () { if (!wait && !board[6] && !gameEnd) square6.innerHTML = '&nbsp;'; };
+    square7.onmouseleave = function () { if (!wait && !board[7] && !gameEnd) square7.innerHTML = '&nbsp;'; };
+    square8.onmouseleave = function () { if (!wait && !board[8] && !gameEnd) square8.innerHTML = '&nbsp;'; };
+    square9.onmouseleave = function () { if (!wait && !board[9] && !gameEnd) square9.innerHTML = '&nbsp;'; };
 }
 
 function Grey_Letter(square) {
@@ -107,10 +108,30 @@ function Play_Turn(numberOfSquare) {
     if (!board[numberOfSquare] && !gameEnd) {
         Place_Letter(numberOfSquare);
         if (mode == 2) {
-            Random_Player();
+            wait = true;
+            if (!gameEnd) {
+                msg.innerHTML = 'Wait...';
+            }
+            setTimeout(function () {
+                Random_Player();
+                wait = false;
+                if (!gameEnd) {
+                    msg.innerHTML = '&nbsp;';
+                }
+            }, 500);
         }
         if (mode == 3) {
-            Mini_Max_Player(board, xBoard, oBoard, false, true);
+            wait = true;
+            if (!gameEnd) {
+                msg.innerHTML = 'Wait...';
+            }
+            setTimeout(function () {
+                Mini_Max_Player(board, xBoard, oBoard, false, true);
+                wait = false;
+                if (!gameEnd) {
+                    msg.innerHTML = '&nbsp;';
+                }
+            }, 500);
         }
     }
 }
